@@ -1,0 +1,19 @@
+@import './spacing.mixins';
+
+// Classes
+// Margin classes
+.margin { @include direction-space('margin'); }
+
+// Padding classes
+.padding { @include direction-space('padding'); }
+
+// Responsive
+@include media('medium') {
+    .#{$media-prefix-medium}margin { @include direction-space('margin'); }
+    .#{$media-prefix-medium}padding { @include direction-space('padding'); }
+}
+
+@include media('large') {
+    .#{$media-prefix-large}margin { @include direction-space('margin'); }
+    .#{$media-prefix-large}padding { @include direction-space('padding'); }
+}

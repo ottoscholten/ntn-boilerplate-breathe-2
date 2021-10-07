@@ -1,0 +1,17 @@
+@import '../variables';
+@import '../mixins';
+@import '../maps';
+
+// Text transform
+// .text-transform-uppercase
+
+// Text align
+@include utility-classes('text-align', $positions);
+
+
+
+// Vertical align
+// @include utility-classes(vertical-align, baseline top middle bottom text-top text-bottom)
+
+// Text bold
+// .text-bold { font-weight: $font-weight-bold; }

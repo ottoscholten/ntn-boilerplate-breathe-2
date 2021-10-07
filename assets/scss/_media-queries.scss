@@ -1,0 +1,19 @@
+@import 'variables';
+
+@mixin media($query) {
+    @if ( $query == 'medium' ) {
+        @media (min-width: $media-medium) {
+            @content;
+        }
+    }
+    @if ( $query == 'large' ) {
+        @media (min-width: $media-large) {
+            @content;
+        }
+    }
+    @if ( $query == 'xlarge' ) {
+        @media (min-width: $media-xlarge) {
+            @content;
+        }
+    }
+}

@@ -1,0 +1,35 @@
+@import '../../variables';
+
+// Alternative Classes
+.subtitle {
+    font-size: $font-size-small;
+    line-height: $line-height-small;
+    @include media('medium') {
+        font-size: $font-size;
+        line-height: $line-height;
+    }
+}
+.intro {
+    font-size: $font-size;
+    line-height: $line-height-medium;
+    @include media('medium') {
+        font-size: $font-size-medium;
+        line-height: $line-height-large;
+    }
+}
+.paragraph {
+    font-size: $font-size-small;
+    line-height: $line-height;
+    @include media('medium') {
+        font-size: $font-size;
+        line-height: $line-height-medium;
+    }
+}
+.page-title {
+    font-size: $font-size;
+    line-height: $line-height-medium;
+    @include media('medium') {
+        font-size: $font-size-medium;
+        line-height: $line-height-medium;
+    }
+}

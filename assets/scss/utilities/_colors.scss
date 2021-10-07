@@ -1,0 +1,8 @@
+@import '../maps';
+@import '../mixins';
+
+// Color and background color
+// Define color and background color utilities based on '$colors' map.
+
+@include utility-classes('color', $colors);
+@include utility-classes('background-color', $colors)

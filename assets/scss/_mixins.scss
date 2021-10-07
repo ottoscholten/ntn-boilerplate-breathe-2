@@ -1,0 +1,53 @@
+@import './maps';
+@import './variables';
+
+// Utility classes
+// $property: css property
+// $options: map
+
+@mixin utility-classes($property, $options) {
+    @each $name, $value in $options {
+        .#{$property}-#{$name} {
+            #{$property}: $value;
+        }
+    }
+}
+
+// Spacing utilitie classes
+// $property: css property
+// $directions: map
+// $spaces: map
+
+@mixin spacing-utility-classes($property, $prefix: '') {
+    @each $space-name, $space-value in $spaces {
+        @each $dir-name, $dir-value in $directions {
+            .#{$prefix}#{$property}#{$dir-name}-#{$space-name} {
+                @each $dir in $dir-value {
+                    @if $space-value == 0 {
+                        #{$property}#{$dir}: $space-value;
+                    }
+
+                    @else {
+                        #{$property}#{$dir}: $space-value;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Negative spacing utility classes
+// $negative-directions: map
+// $spaces: map
+
+@mixin negative-spacing-utility-classes($property, $prefix: '') {
+    @each $space-name, $space-value in $spaces {
+        @each $dir-name, $dir-value in $directions {
+            .#{$prefix}#{$property}#{$dir-name}-#{$space-name}--negative {
+                @each $dir in $dir-value {
+                    #{$property}#{$dir}: -$space-value;
+                }
+            }
+        }
+    }
+}

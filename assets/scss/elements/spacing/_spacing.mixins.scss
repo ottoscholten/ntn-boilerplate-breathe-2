@@ -1,0 +1,19 @@
+@import '../../maps';
+
+@mixin direction-space($type) {
+    @each $spaceKey, $spaceValue in $spaces {
+        @each $directionKey, $directionValue in $directions {
+            &#{$directionKey}-#{$spaceKey} {
+                @if ($directionKey == '-x') {
+                    #{$type}-left: $spaceValue;
+                    #{$type}-right: $spaceValue;
+                } @else if ($directionKey == '-y') {
+                    #{$type}-top: $spaceValue;
+                    #{$type}-bottom: $spaceValue
+                } @else { 
+                    #{$type}#{$directionValue}: $spaceValue;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,22 @@
+@import '../../variables';
+@import './heading.mixins';
+
+// Classes
+.heading-small { @include heading-small; }
+.heading { @include heading; }
+.heading-large { @include heading-large; }
+
+// Responsive Classes
+// @use .heading .md-heading-large
+// the prefixed cclasses will overwrite .heading in media query "medium
+@include media('medium') {
+    .#{$media-prefix-medium}heading-small { @include heading-small; }
+    .#{$media-prefix-medium}heading { @include heading; }
+    .#{$media-prefix-medium}heading-large { @include heading-large; }
+}
+
+@include media('large') {
+    .#{$media-prefix-large}heading-small { @include heading-small; }
+    .#{$media-prefix-large}heading { @include heading; }
+    .#{$media-prefix-large}heading-large { @include heading-large; }
+}

@@ -1,0 +1,26 @@
+@import './text.mixins';
+@import '../../variables';
+
+// Text Classes
+.text-xsmall { @include text-xsmall; }
+.text-small { @include text-small; }
+.text { @include text; }
+.text-medium { @include text-medium; }
+
+// Responsive Classes
+// @use .text .md-text-medium
+// the prefixed classes will overwrite .text in media query "medium"
+@include media('medium') {
+    .#{$media-prefix-medium}text-xsmall { @include text-xsmall; }
+    .#{$media-prefix-medium}text-small { @include text-small; }
+    .#{$media-prefix-medium}text { @include text; }
+    .#{$media-prefix-medium}text-medium { @include text-medium; }
+}
+
+@include media('large') {
+    .#{$media-prefix-large}text-xsmall { @include text-xsmall; }
+    .#{$media-prefix-large}text-small { @include text-small; }
+    .#{$media-prefix-large}text { @include text; }
+    .#{$media-prefix-large}text-medium { @include text-medium; }
+}
+

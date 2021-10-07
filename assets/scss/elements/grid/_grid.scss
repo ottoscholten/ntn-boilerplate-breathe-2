@@ -1,0 +1,38 @@
+@import '../../variables';
+@import "./_grid.mixins.scss";
+
+// Classes
+.grid {
+    @include grid;
+}
+
+.grid--reverse {
+    flex-direction: row-reverse;
+}
+
+.grid__col {
+    @include grid-column;
+    @include grid-column-widths;
+    @include grid-column-offsets;
+}
+
+// Responsive classes
+@include media('medium') {
+    .#{$media-prefix-medium}grid__col {
+       @include grid-column-widths;
+       @include grid-column-offsets; 
+    }
+    .#{$media-prefix-medium}grid--reverse {
+        flex-direction: row-reverse;
+     }
+}
+
+@include media('large') {
+    .#{$media-prefix-large}grid__col {
+       @include grid-column-widths;
+       @include grid-column-offsets; 
+    }
+    .#{$media-prefix-large}grid--reverse {
+        flex-direction: row-reverse;
+     }
+}

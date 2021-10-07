@@ -1,0 +1,88 @@
+@import '../../variables';
+
+$button-spacing-x: 8px;
+$button-spacing-y: 7px;
+
+%base-outline {
+    border: $border-width-2 $border-style transparent;
+    border-radius: $border-radius-9;
+    bottom: -4px;
+    box-sizing: content-box;
+    content: '';
+    left: -4px;
+    position: absolute;
+    right: -4px;
+    top: -4px;
+}
+
+%base-button {
+    align-items: center;
+    background-color: transparent;
+    border: $border-width-1 $border-style transparent;
+    border-radius: $border-radius-6;
+    color: $color-black;
+    display: inline-flex;
+    font-size: $font-size;
+    font-weight: $font-weight;
+    height: $height-button;
+    justify-content: center;
+    line-height: $line-height;
+    padding: $button-spacing-y $button-spacing-x*3;
+    position: relative; // Used for :before
+    vertical-align: bottom;
+    white-space: nowrap;
+    &:link, &:visited {
+        color: $color-black;
+    }
+    &:hover, &:focus, &:active {
+        background-color: transparent;
+    }
+    &:focus, &:active {
+        &::before {
+            @extend %base-outline;
+        }
+    }
+}
+
+@mixin button-primary {
+    @extend %base-button;
+
+    background-color: $color-black;
+    color: $color-white;
+
+    &:link, &:visited {
+        color: $color-white;
+    }
+    &:hover {
+        background-color: $color-grey;
+    }
+    &:focus, &:active {
+        background-color: $color-grey;
+        &::before {
+            border-color: $color-black;
+        }
+    }
+}
+
+// This would have different styling
+@mixin button-primary-dark {
+    @extend %base-button;
+
+    background-color: $color-black;
+    color: $color-white;
+
+    &:link, &:visited {
+        color: $color-white;
+    }
+    &:hover {
+        background-color: $color-grey;
+    }
+    &:focus, &:active {
+        background-color: $color-grey;
+        &::before {
+            border-color: $color-black;
+        }
+    }
+}
+
+// Secondary would be the same, but with border instead of background color.

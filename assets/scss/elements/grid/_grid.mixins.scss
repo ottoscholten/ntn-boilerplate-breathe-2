@@ -1,0 +1,64 @@
+@import '../../variables';
+@import '../../mixins';
+
+@function get-columns-array($total) {
+    $columns: ();
+
+    @for $i from 1 through $total {
+        $columns: append($columns, ($i));
+    };
+
+    @return $columns; // [1, 2, 3 ... 12]
+}
+
+@function column-percentage($i, $total) {
+    @return (100% / $total ) * $i; // 100% / 12 * 1  = 8.33
+}
+
+@mixin grid {
+    display: flex;
+    flex-flow: wrap;
+    margin-left: -$spacing-24;
+    margin-right: -$spacing-24;
+}
+
+@mixin grid-column {
+    box-sizing: border-box;
+    flex: 1;
+    max-width: 100%;
+    padding-left: $spacing-24;
+    padding-right: $spacing-24;
+    width: 100%;
+}
+
+$grid-columns: 12 !default;
+
+$grid-columns-array: get-columns-array($grid-columns) !default;
+
+@mixin grid-column-width($i, $total) {
+    flex: 0 0 column-percentage($i, $total);
+    max-width: column-percentage($i, $total);
+}
+
+@mixin grid-column-widths($total: $grid-columns) {
+    @each $i in $grid-columns-array {
+        &--#{$i} {
+            @include grid-column-width($i, $total);
+        }
+    }
+}
+
+@mixin grid-column-offset ($i, $total) {
+    margin-left: column-percentage($i, $total);
+}
+
+@mixin grid-column-offsets ($total: $grid-columns) {
+    @for $i from 1 through $total {
+        // prevent offset of 12 of 12, which would result in maring-left 100%
+        @if ($i != $total) {
+            &--offset-#{$i} {
+                @include grid-column-offset($i, $total);
+            }
+        }
+    }
+}

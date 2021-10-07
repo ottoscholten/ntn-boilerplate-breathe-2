@@ -1,0 +1,9 @@
+@import './button.mixins';
+
+// Classes
+// Primary
+.button-primary { @include button-primary; }
+// .button-primary--dark { @include button-primary-dark; }
+
+// Secondary
+// .button-secondary { @include button-secondary; }

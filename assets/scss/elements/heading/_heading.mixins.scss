@@ -1,0 +1,23 @@
+@import '../../variables';
+
+@mixin heading-small {
+    font-size: $font-size-medium;
+    font-weight: $font-weight-bold;
+    line-height: $line-height-medium;
+}
+
+@mixin heading {
+    font-size: $font-size-large;
+    font-weight: $font-weight-bold;
+    line-height: $line-height-large;
+}
+
+@mixin heading-large {
+    font-size: $font-size-medium;
+    font-weight: $font-weight-bold;
+    line-height: $line-height-medium;
+    @include media('medium') {
+        font-size: $font-size-xlarge;
+        line-height: $font-size-2xlarge;
+    }
+}

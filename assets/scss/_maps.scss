@@ -1,0 +1,40 @@
+@import './variables';
+
+$colors: (
+    'white': $color-white,
+    'black': $color-black,
+    'grey': $color-grey,
+    'grey-300': $color-grey-300,
+    'green': $color-green,
+    'blue': $color-blue,
+    'turquoise': $color-turquoise,
+    'orange': $color-orange
+) !default;
+
+$spaces: (
+    0: $spacing-0,
+    3: $spacing-3,
+    6: $spacing-6,
+    12: $spacing-12,
+    24: $spacing-24,
+    48: $spacing-48,
+    96: $spacing-96,
+    144: $spacing-144,
+    192: $spacing-192
+) !default;
+
+$directions: (
+    '': '',
+    -left: '-left',
+    -right: '-right',
+    -bottom: '-bottom',
+    -top: '-top',
+    -x: '-x',
+    -y: '-y'
+) !default;
+
+$positions: (
+    center: center,
+    left: left,
+    right: right
+) !default;

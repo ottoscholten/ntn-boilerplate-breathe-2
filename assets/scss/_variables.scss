@@ -1,0 +1,86 @@
+// Media queries
+$media-medium: 768px;
+$media-large: 1248px;
+$media-xlarge: 1440px;
+
+// Media prefixes
+$media-prefix-medium: md-;
+$media-prefix-large: lg-;
+$media-prefix-xlarge: xl-;
+
+// Width
+$width-max: 1248px;
+$width-min: 320px;
+
+// Height
+$height-button: 42px;
+
+// Font family
+// todo - replace with my own font
+$font-family: OpenSans, sans-serif !default;
+$font-family-normal: fakt-normal, sans-serif !default;
+$font-family-path: '../assets/fonts';
+
+// Font size
+$font-size-xsmall: 14px !default;
+$font-size-small: 16px !default;
+$font-size: 21px !default;
+$font-size-medium: 31px !default;
+$font-size-large: 36px !default;
+$font-size-xlarge: 46px !default;
+$font-size-2xlarge: 70px !default;
+
+// Line height
+$line-height-xsmall: 16px !default;
+$line-height-small: 20px !default;
+$line-height: 30px !default;
+$line-height-medium: 40px !default;
+$line-height-large: 50px !default;
+$line-height-xlarge: 60px !default;
+$line-height-2xlarge: 70px !default;
+
+// Font weight
+$font-weight-light: 200 !default;
+$font-weight: 400 !default;
+$font-weight-bold: 600 !default;
+
+// Colors
+$color-white: #ffffff !default;
+// $color-white-opacity-40: #{$color-white}40 !default;
+$color-black: #130a35 !default;
+$color-grey-300: #d2dae1 !default;
+$color-grey: $color-grey-300 !default;
+$color-green: #105F66 !default;
+$color-blue: #2C3E5F !default;
+$color-turquoise: #4BABB5 !default;
+$color-orange: #FAA624 !default;
+
+// Spacing
+$spacing-0: 0 !default;
+$spacing-3: 3px !default;
+$spacing-6: 6px !default;
+$spacing-12: 12px !default;
+$spacing-24: 24px !default;
+$spacing-48: 48px !default;
+$spacing-96: 96px !default;
+$spacing-144: 144px !default;
+$spacing-192: 192px !default;
+
+// Border width
+$border-width-1: 1px !default;
+$border-width-2: 2px !default;
+
+// Border style
+$border-style: solid !default;
+
+// Border radius
+$border-radius-6: 6px !default; // For button
+$border-radius-9: 9px !default; // For button
+
+// z-index
+$z-index-0: 0;
+$z-index-1: 1;
+$z-index-2: 2;
+
+// Navigation
+$header-height: 96px;

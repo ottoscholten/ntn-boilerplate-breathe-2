@@ -1,13 +1,55 @@
 <template>
-  <main>
-    <section class="self-center flex flex-col flex-1 items-center justify-center">
-      <h1 class="title text-center">Nuxt — Tailwind — Netlify CMS</h1>
-      <h2 class="subtitle text-center">Boilerplate</h2>
-    </section>
+    <PageLayout>
+        <template v-slot:header="props">
+            <Navigation :media="props.media" theme="green" />
+        </template>
 
-    <section class="mt-8">
-      <h3 class="text-primary-600 dark:text-primary-400 max-w-5xl mx-auto">Latest blog post</h3>
-      <posts post-type="blog" :amount="1" />
-    </section>
-  </main>
+        <template v-slot:content="props">
+            <div style="min-height: 250px; background-color: lightgrey">
+                <text-image
+                    eyebrow="purpose"
+                    title="organize to serve the whole"
+                    :image="{
+                        src: '/img/walking-escalator.jpg',
+                        alt: 'Some picture'
+                    }"
+                    padding="hero"
+                    theme="green"
+                    :media="props.media"
+                />
+                <section>
+                    <div class="container">
+                        <h2>heyo</h2>
+                    </div>
+                </section>
+            </div>
+        </template>
+    </PageLayout>
 </template>
+
+<script>
+import PageLayout from '../layouts/page-layout'
+import Navigation from '../components/global/navigation/navigation'
+import TextImage from '../components/text-image/text-image'
+
+export default {
+    components: {
+        PageLayout,
+        Navigation,
+        TextImage
+    },
+    async asyncData({ $content, params, error }) {
+        let post
+        try {
+            post = await $content('site/navigation', params.slug).fetch()
+            // OR const article = await $content(`articles/${params.slug}`).fetch()
+        } catch (e) {
+            error({ message: 'Blog Post not found' })
+        }
+
+        return {
+            post
+        }
+    }
+}
+</script>

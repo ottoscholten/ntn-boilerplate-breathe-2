@@ -39,6 +39,31 @@ collections:
               pattern: ['^[a-z]{2}([-])?([A-Za-z]{2})?$', 'Must match "xx" or "xx-XX" syntax (ex. "en" or "sv-SE")'],
             }
           # - { label: Site Email, name: siteemail, widget: string, required: false }
+      - label: 'Navigation'
+        name: 'navigation'
+        file: 'content/site/navigation.json'
+        format: 'json'
+        editor: 
+          preview: false
+        fields:
+          - label: Main navigation items
+            name: mainNavigationItems
+            widget: list
+            collapsed: true
+            max: 6
+            min: 1
+            fields:
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - { label: 'Slug', name: 'slug', widget: 'string', default: '/', required: true }
+          - label: Call to action navigation items
+            name: ctaNavigationItems
+            widget: list
+            collapsed: true
+            max: 2
+            min: 0
+            fields:
+              - { label: 'Page name', name: 'pageName', widget: 'string' }
+              - { label: 'Slug', name: 'slug', widget: 'string', default: '/', required: true }
   - name: 'blog'
     label: 'Blog'
     folder: 'content/blog'
