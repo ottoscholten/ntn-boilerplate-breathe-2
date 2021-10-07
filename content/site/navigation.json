@@ -25,6 +25,10 @@
     {
       "slug": "/contact",
       "title": "Get in touch"
+    },
+    {
+      "slug": "/test",
+      "title": "test"
     }
   ]
 }
