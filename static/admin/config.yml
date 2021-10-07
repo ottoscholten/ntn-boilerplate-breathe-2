@@ -62,7 +62,7 @@ collections:
             max: 2
             min: 0
             fields:
-              - { label: 'Page name', name: 'pageName', widget: 'string' }
+              - { label: 'Title', name: 'title', widget: 'string' }
               - { label: 'Slug', name: 'slug', widget: 'string', default: '/', required: true }
   - name: 'blog'
     label: 'Blog'

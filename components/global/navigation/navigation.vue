@@ -1,5 +1,10 @@
 <template>
-    <component :is="isVertical ? 'NavigationVertical' : 'NavigationHorizontal'" :theme="theme" />
+    <component
+        :is="isVertical ? 'NavigationVertical' : 'NavigationHorizontal'"
+        :theme="theme"
+        :mainNavigationItems="navigation.mainNavigationItems"
+        :ctaNavigationItems="navigation.ctaNavigationItems"
+    />
 </template>
 
 <script>
@@ -14,7 +19,8 @@ export default {
     },
     props: {
         media: { type: String, required: true },
-        theme: { type: String, default: 'blue' }
+        theme: { type: String, default: 'blue' },
+        navigation: { type: Object, required: true }
     },
     computed: {
         isVertical() {

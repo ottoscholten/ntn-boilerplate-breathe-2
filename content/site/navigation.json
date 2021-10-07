@@ -1,0 +1,30 @@
+{
+  "mainNavigationItems": [
+    {
+      "slug": "/approach",
+      "title": "Approach"
+    },
+    {
+      "slug": "/companies",
+      "title": "Companies"
+    },
+    {
+      "slug": "/team",
+      "title": "Team"
+    },
+    {
+      "slug": "/purpose",
+      "title": "Purpose"
+    },
+    {
+      "slug": "/inspiration",
+      "title": "Inspiration"
+    }
+  ],
+  "ctaNavigationItems": [
+    {
+      "slug": "/contact",
+      "title": "Get in touch"
+    }
+  ]
+}

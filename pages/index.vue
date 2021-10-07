@@ -1,7 +1,7 @@
 <template>
     <PageLayout>
         <template v-slot:header="props">
-            <Navigation :media="props.media" theme="green" />
+            <Navigation :media="props.media" :navigation="navigation" theme="green" />
         </template>
 
         <template v-slot:content="props">
@@ -38,17 +38,12 @@ export default {
         Navigation,
         TextImage
     },
-    async asyncData({ $content, params, error }) {
-        let post
-        try {
-            post = await $content('site/navigation', params.slug).fetch()
-            // OR const article = await $content(`articles/${params.slug}`).fetch()
-        } catch (e) {
-            error({ message: 'Blog Post not found' })
-        }
+    async asyncData({ $content }) {
+        const navigation = await $content('site/navigation').fetch()
+        console.log(navigation)
 
         return {
-            post
+            navigation
         }
     }
 }
