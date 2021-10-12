@@ -1,51 +1,50 @@
 <template>
-    <section class="container" :class="backgroundColor">
-        <div class="navigation">
-            <nuxt-link to="/" class="navigation__logo">
-                <img src="/logo.svg" alt="Breathe logo" />
-            </nuxt-link>
-            <div tabindex="-1">
-                <button
-                    type="button"
-                    class="navigation__button"
-                    aria-controls="navigation"
-                    :aria-expanded="isOpen"
-                    @click="isOpen = !isOpen"
+    <div class="navigation-bar container">
+        <nuxt-link to="/" class="navigation-bar__logo">
+            <img src="/logo.svg" alt="Breathe logo" />
+        </nuxt-link>
+        <div tabindex="-1">
+            <button
+                type="button"
+                class="navigation-bar__button"
+                aria-controls="navigation"
+                :aria-expanded="isOpen"
+                @click="isOpen = !isOpen"
+            >
+                <div v-html="require(`~/static/img/icons/menu.svg?raw`)" class="navigation-bar__button-icon" />
+                <!-- <svg
+                    width="22"
+                    height="18"
+                    viewbox="0 0 22 18"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
                 >
-                    <svg
-                        width="22"
-                        height="18"
-                        viewbox="0 0 22 18"
-                        fill="none"
-                        stroke="white"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <path d="M1 1H19" class="line1"></path>
-                        <path d="M1 8H19" class="line2"></path>
-                        <path d="M1 15H19" class="line3"></path>
-                    </svg>
-                </button>
-                <transition name="slide-in">
-                    <nav v-if="isOpen" :class="backgroundColor" class="nav" aria-label="Main Menu">
-                        <div class="container nav--margin">
-                            <ul class="nav__main">
-                                <li v-for="(item, index) in mainNavigationItems" :key="index" class="nav__main-item color-white">
-                                    <nuxt-link :to="item.slug">{{ item.title }}</nuxt-link>
-                                </li>
-                            </ul>
-                            <ul class="nav__cta">
-                                <li v-for="(item, index) in ctaNavigationItems" :key="index" class="nav__cta-item color-orange">
-                                    <nuxt-link :to="item.slug">{{ item.title }}</nuxt-link>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                </transition>
-            </div>
+                    <path d="M1 1H19" class="line1"></path>
+                    <path d="M1 8H19" class="line2"></path>
+                    <path d="M1 15H19" class="line3"></path>
+                </svg> -->
+            </button>
+            <transition name="slide-in">
+                <nav v-if="isOpen" :class="backgroundColorClass" class="nav" aria-label="Main Menu" v-click-outside="onClickOutside">
+                    <div class="container nav--margin">
+                        <ul class="nav__main">
+                            <li v-for="(item, index) in mainNavigationItems" :key="index" class="nav__main-item color-white">
+                                <nuxt-link :to="item.slug">{{ item.title }}</nuxt-link>
+                            </li>
+                        </ul>
+                        <ul class="nav__cta">
+                            <li v-for="(item, index) in ctaNavigationItems" :key="index" class="nav__cta-item color-orange">
+                                <nuxt-link :to="item.slug">{{ item.title }}</nuxt-link>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </transition>
         </div>
-    </section>
+    </div>
 </template>
 
 <script>
@@ -55,7 +54,7 @@ export default {
         isOpen: false
     }),
     props: {
-        theme: { type: String, default: 'blue' },
+        backgroundColor: { type: String, required: true },
         mainNavigationItems: { type: Array, required: true },
         ctaNavigationItems: { type: Array, required: true }
     },
@@ -70,9 +69,14 @@ export default {
             }
         }
     },
+    methods: {
+        onClickOutside() {
+            this.isOpen = false
+        }
+    },
     computed: {
-        backgroundColor() {
-            return 'background-color-' + this.theme
+        backgroundColorClass() {
+            return 'background-color-' + this.backgroundColor
         }
     },
     beforeDestroy() {
@@ -88,7 +92,7 @@ export default {
 @import '~/assets/scss/media-queries.scss';
 
 // Entire header bar
-.navigation {
+.navigation-bar {
     align-items: center;
     display: flex;
     height: $header-height;
@@ -102,12 +106,23 @@ export default {
         z-index: 2;
         width: 48px;
         height: 48px;
+
+        &:focus {
+            border: 1px solid $color-white;
+        }
+
+        &-icon {
+            color: $color-white;
+            display: inline-flex;
+            width: 32px;
+            height: 32px;
+        }
     }
 }
 
 // The nav
 .nav {
-    box-shadow: 0px 10px 10px rgba(0, 24px, 24px, 0.1);
+    box-shadow: 0px 24px 24px rgba(0, 0, 0, 0.2);
     height: 100vh;
     overflow: hidden;
     position: fixed;
@@ -127,7 +142,8 @@ export default {
     &__main,
     &__cta {
         &-item {
-            @include text-xsmall;
+            @include text-small;
+            margin-bottom: $spacing-24;
         }
     }
 }

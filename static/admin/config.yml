@@ -13,6 +13,70 @@ local_backend: true
 media_folder: static/img
 public_folder: /img
 
+# Reusable content
+aliases:
+  - &TITLE { label: Title, name: title, widget: string }
+  - &SLUG { label: Slug, name: slug, widget: string, required: true }
+  - &MARKDOWN { label: Text, name: text, widget: markdown }
+  - &READMORE { label: Read more text, name: readMoreText, widget: markdown, required: false }
+  - &LINK 
+      label: Link
+      name: link
+      widget: object
+      collapsed: true
+      summary: '{{fields.text}} - {{fields.slug}}'
+      fields:
+        - { label: Text, name: text, widget: string, required: false }
+        - { label: Slug, name: slug, widget: string, required: false }
+  - &SOURCE { label: Source, name: src, widget: image, choose_url: false, allow_multiple: false }
+  - &ALT { label: Alt text, name: alt, widget: string }
+  - &IMAGE
+      label: Image 
+      name: image 
+      widget: object
+      collapsed: true
+      summary: '{{fields.src}} - {{fields.alt}}'
+      fields: 
+        - *SOURCE
+        - *ALT
+  - &IMAGELIST
+      label: Images
+      name: imageList
+      widget: list
+      collapsed: true
+      allow_add: true
+      min: 1
+      max: 3
+      fields: 
+        - *SOURCE
+        - *ALT
+  - &HERO
+      label: Hero
+      name: hero
+      widget: object
+      collapsed: true
+      summary: '{{fields.eyebrow}} - {{fields.title}}'
+      fields: 
+        - { label: Eyebrow, name: eyebrow, widget: string, required: false }
+        - *TITLE
+        - *IMAGE
+        - *LINK
+  - &TEXTIMAGE
+      label: Text Image
+      name: textImage
+      widget: object
+      collapsed: true
+      summary: '{{fields.title}} - {{fields.subtitle}}'
+      fields: 
+        - << : *TITLE
+          required: false
+        - { label: Subtitle, name: subtitle, widget: string }
+        - *IMAGELIST
+        - *MARKDOWN
+        - *LINK
+        - *READMORE
+
+
 # Docs: https://www.netlifycms.org/docs/configuration-options/#collections
 collections:
   - label: 'Site settings'
@@ -53,8 +117,8 @@ collections:
             max: 6
             min: 1
             fields:
-              - { label: 'Title', name: 'title', widget: 'string' }
-              - { label: 'Slug', name: 'slug', widget: 'string', default: '/', required: true }
+              - *TITLE
+              - *SLUG
           - label: Call to action navigation items
             name: ctaNavigationItems
             widget: list
@@ -62,8 +126,30 @@ collections:
             max: 2
             min: 0
             fields:
-              - { label: 'Title', name: 'title', widget: 'string' }
-              - { label: 'Slug', name: 'slug', widget: 'string', default: '/', required: true }
+              - *TITLE
+              - *SLUG
+  - label: 'Pages'
+    name: 'pages'
+    files:
+      - label: 'Home'
+        name: 'home'
+        file: 'content/pages/home.json'
+        format: 'json'
+        editor:
+          preview: false
+        fields:
+          - *HERO
+      - label: 'Purpose'
+        name: 'purpose'
+        file: 'content/pages/purpose.md'
+        format: 'frontmatter'
+        editor:
+          preview: false
+        fields:
+          - *HERO
+          - << : *TEXTIMAGE
+            name: textImageOne
+
   - name: 'blog'
     label: 'Blog'
     folder: 'content/blog'

@@ -1,10 +1,12 @@
 <template>
-    <component
-        :is="isVertical ? 'NavigationVertical' : 'NavigationHorizontal'"
-        :theme="theme"
-        :mainNavigationItems="navigation.mainNavigationItems"
-        :ctaNavigationItems="navigation.ctaNavigationItems"
-    />
+    <section :class="`background-color-${backgroundColor}`" class="navigation">
+        <component
+            :is="isVertical ? 'NavigationVertical' : 'NavigationHorizontal'"
+            :background-color="backgroundColor"
+            :mainNavigationItems="navigation.mainNavigationItems"
+            :ctaNavigationItems="navigation.ctaNavigationItems"
+        />
+    </section>
 </template>
 
 <script>
@@ -19,7 +21,7 @@ export default {
     },
     props: {
         media: { type: String, required: true },
-        theme: { type: String, default: 'blue' },
+        backgroundColor: { type: String, default: 'blue' },
         navigation: { type: Object, required: true }
     },
     computed: {
@@ -32,4 +34,9 @@ export default {
 
 <style lang="scss" scoped>
 @import '~/assets/scss/variables.scss';
+.navigation {
+    height: $header-height + 1; // This fixes 1 pixel line bug, that you see if size is perfect.
+    align-items: center;
+    display: flex;
+}
 </style>

@@ -1,109 +1,85 @@
 <template>
-    <section :class="`background-color-${theme} ${paddingClass}`">
+    <section class="text-image padding-y-24 md-padding-y-48">
         <div class="container">
-            <div :class="`grid align-items-center text-image`">
-                <div class="grid__col grid__col--12 md-grid__col--6 md-grid__col--offset-2 text-image--text">
-                    <h2 class="margin-bottom-12 color-turquoise page-title">{{ eyebrow }}</h2>
-                    <h1 class="color-white heading-large">{{ title }}</h1>
+            <div class="grid justify-content-space-between">
+                <div class="grid__col grid__col--12 md-grid__col--7 lg-grid__col--6">
+                    <h2 v-if="!!content.title" class="subtitle margin-bottom-12">{{ content.title }}</h2>
+                    <p class="intro margin-bottom-24">{{ content.subtitle }}</p>
+                    <markdown :markdown="content.text" />
+                    <div v-if="!!content.link" class="margin-top-24 md-margin-top-48 margin-bottom-24 md-margin-bottom-0">
+                        <Link :link="content.link" />
+                    </div>
                 </div>
-                <div v-if="media !== 'small'" class="text-image--background" :style="getBackgroundImage()" />
-                <div class="text-image--circle" :style="getCircles()"></div>
+                <div class="grid__col grid__col--12 md-grid__col--5" :class="{ 'height-100': media === 'small' }">
+                    <read-more
+                        v-if="!!content.readMoreText && media === 'small'"
+                        :read-more-text="content.readMoreText"
+                        class="margin-bottom-24"
+                        style="margin-left: -24px; margin-right: -24px"
+                    />
+                    <template v-if="content.imageList.length === 3">
+                        <!-- If 3 images -->
+                        <div class="grid height-100">
+                            <div class="grid__col grid__col--12 margin-bottom-12 md-margin-bottom-24">
+                                <img :src="content.imageList[0].src" :alt="content.imageList[0].alt" class="image-3" />
+                            </div>
+                            <div class="grid__col grid__col--6 padding-right-6 md-padding-right-12">
+                                <img :src="content.imageList[1].src" :alt="content.imageList[1].alt" class="image-3" />
+                            </div>
+                            <div class="grid__col grid__col--6 padding-left-6 md-padding-left-12">
+                                <img :src="content.imageList[2].src" :alt="content.imageList[2].alt" class="image-3" />
+                            </div>
+                        </div>
+                    </template>
+                    <template v-else>
+                        <img :key="index" :src="content.imageList[0].src" :alt="content.imageList[0].alt" class="image-1" />
+                    </template>
+                </div>
             </div>
         </div>
+        <read-more v-if="!!content.readMoreText && media !== 'small'" :read-more-text="content.readMoreText" class="margin-top-24" />
     </section>
 </template>
 
 <script>
+import ReadMore from '../global/read-more/read-more.vue'
+
 export default {
-    name: 'TextImage',
+    components: { ReadMore },
     props: {
-        eyebrow: { type: String, required: true },
-        title: { type: String, required: true },
-        image: { type: Object, required: true },
-        padding: { type: String, default: 'small' },
-        theme: { type: String, default: 'white' },
-        media: { type: String, required: true }
-    },
-    data: () => ({
-        paddingClass: ''
-    }),
-    mounted() {
-        this.paddingClass = this.getPaddingClass(this.padding)
-    },
-    methods: {
-        getPaddingClass(padding) {
-            switch (true) {
-                case padding == 'hero':
-                    return 'padding-top-24 padding-bottom-48'
-                case padding == 'large':
-                    return 'padding-y-96'
-                case padding == 'medium':
-                    return 'padding-y-48'
-                case padding == 'none':
-                    return 'padding-y-0'
-                default:
-                    return 'padding-y-24'
-            }
-        },
-        getBackgroundImage() {
-            let background = `url(${this.image.src})`
-            let backgroundRepeat = `no-repeat`
-            let backgroundPosition = `left center`
-            let backgroundSize = `cover`
-
-            return {
-                background,
-                backgroundRepeat,
-                backgroundPosition,
-                backgroundSize
-            }
-        },
-        getCircles() {
-            const circles = `'./img/circles-white.svg'`
-            let background = `url(${circles})`
-            let backgroundRepeat = `no-repeat`
-            let backgroundPosition = `center 0`
-            let backgroundSize = `contain`
-            let height = `650px`
-
-            if (this.media === 'small') {
-                backgroundSize = `cover`
-            }
-            if (this.media === 'medium') {
-                height = `500px`
-            }
-
-            return {
-                background,
-                backgroundRepeat,
-                backgroundPosition,
-                backgroundSize,
-                height
-            }
-        }
+        media: { type: String, required: true },
+        content: { type: Object, required: true }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/variables.scss';
+@import '~/assets/scss/variables.scss';
+@import '~/assets/scss/media-queries.scss';
 
-.text-image {
-    min-height: 650px;
-    &--text {
-        z-index: $z-index-1;
+// Single image
+.image-1 {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    &:first-child {
+        max-height: 360px;
+        @include media('medium') {
+            max-height: 100%;
+            min-height: 600px;
+        }
+        @include media('large') {
+            min-height: 100%;
+        }
     }
-    &--circle {
-        position: absolute;
-        width: 100%;
-        right: 0;
-    }
-    &--background {
-        position: absolute;
-        height: 580px;
-        width: 50vw;
-        right: 50%;
-        transform: translateX(50vw);
-    }
+}
+
+// When 3 images
+.image-3 {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: cover;
 }
 </style>

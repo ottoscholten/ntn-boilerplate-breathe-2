@@ -1,4 +1,19 @@
+@import '../media-queries';
+
+// Display
 .display-flex { display: flex; }
+.display-none { display: none; }
+.display-block { display: block; }
+@include media('medium') {
+    .#{$media-prefix-medium}display-none { display: none; }
+    .#{$media-prefix-medium}display-block { display: block; }
+}
+@include media('large') {
+    .#{$media-prefix-large}display-none { display: none; }
+    .#{$media-prefix-large}display-block { display: block; }
+}
+
+// Justify
 .justify-content-center { justify-content: center; }
 .justify-content-start { justify-content: flex-start; }
 .justify-content-end { justify-content: flex-end; }

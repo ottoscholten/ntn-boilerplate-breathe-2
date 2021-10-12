@@ -66,15 +66,24 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/scroll.client.js', '~/plugins/resize.client.js'],
+  plugins: ['~/plugins/scroll.client.js', '~/plugins/resize.client.js', '~/plugins/click-outside.client.js'],
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: ['@nuxtjs/color-mode', '@nuxtjs/svg', '@nuxtjs/pwa'],
+  buildModules: ['@nuxtjs/svg', '@nuxtjs/pwa'],
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxt/content', 'nuxt-purgecss'],
+  modules: ['@nuxt/content', 'nuxt-purgecss', '@nuxtjs/markdownit'],
+  markdownit: {
+    runtime: true // Support `$md()`
+  },
+  purgeCSS: {
+    whitelist: [
+      'background-color-green',
+      'background-color-blue'
+    ]
+  },
   /*
    ** Build configuration
    */

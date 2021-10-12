@@ -19,7 +19,7 @@
 
         <footer class="page-layout__footer">
             <section class="container">
-                <div style="height: 120px">footer area</div>
+                <div style="height: 120px">Footer area</div>
             </section>
         </footer>
     </div>
@@ -86,7 +86,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/variables.scss';
+@import '~/assets/scss/variables.scss';
 
 .page-layout {
     display: flex;
@@ -94,7 +94,6 @@ export default {
     height: 100%;
     min-height: 100vh;
     &__header {
-        background-color: $color-white;
         min-height: $header-height;
         position: absolute;
         transform: translateY(0);
@@ -112,11 +111,11 @@ export default {
     }
     &__content {
         flex: 1;
-        margin-top: $header-height; // Update to 36?
+        margin-top: $header-height;
         z-index: $z-index-0;
     }
     &__footer {
-        background-color: $color-black;
+        background-color: $color-blue;
         color: $color-white;
         height: 100%;
         min-height: $spacing-12 * 10;

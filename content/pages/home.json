@@ -1,0 +1,14 @@
+{
+  "hero": {
+    "eyebrow": "",
+    "title": "Building inspired purpose-driven companies in service of the whole",
+    "image": {
+      "src": "/img/girl_sunset.jpg",
+      "alt": "escalator walker"
+    },
+    "link": {
+      "text": "Get in touch",
+      "slug": "contact"
+    }
+  }
+}
